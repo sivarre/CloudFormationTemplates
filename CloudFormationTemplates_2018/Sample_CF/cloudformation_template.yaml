@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  "Description of the template"
+Mappings:
+  "Define mappings for the temmplate"
+Parameters:
+  "Define parametes at the time of the putput"
+Metadata:
+  "Metadata for the Template"
+Conditions:
+  "Verifys if conditions are matched or not"
+Transform:
+  Set of Transforms
+Resources:
+  "Mandatory ******* for the template format"
+  EC2:
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: !Fn::FindMapId [RegionMaps, !Ref "AWS::Region , AMI]
+  
+
+Output:
+  "Gives output based upon the template"
+

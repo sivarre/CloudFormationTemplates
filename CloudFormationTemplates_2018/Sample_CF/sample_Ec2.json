@@ -1,0 +1,69 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Resources":{
+        
+        
+        "rdsDBInstance": {
+          "Type": "AWS::RDS::DBInstance",
+          "Properties": {
+            "AllocatedStorage": "",
+            "DBInstanceClass": "",
+            "AllowMajorVersionUpgrade": "true | false",
+            "AutoMinorVersionUpgrade": "true | false",
+            "AvailabilityZone": "",
+            "BackupRetentionPeriod": "",
+            "CharacterSetName": "",
+            "DBInstanceIdentifier": "",
+            "DBName": "",
+            "DBParameterGroupName": "",
+            "DBSecurityGroups": [ "" ],
+            "DBSnapshotIdentifier": "",
+            "DBSubnetGroupName": "",
+            "Engine": "",
+            "EngineVersion": "",
+            "Iops": "",
+            "KmsKeyId": "",
+            "LicenseModel": "",
+            "MasterUsername": "",
+            "MasterUserPassword": "",
+            "MultiAZ": "true | false",
+            "OptionGroupName": "",
+            "Port": "",
+            "PreferredBackupWindow": "",
+            "PreferredMaintenanceWindow": "",
+            "PubliclyAccessible": "true | false",
+            "SourceDBInstanceIdentifier": "",
+            "StorageEncrypted": "true | false",
+            "StorageType": "",
+            "Tags": [  ],
+            "VPCSecurityGroups": [ "" ]
+          }
+        }
+        
+
+
+        "EC2": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": -,
+                "DisableApiTermination": "-",
+                "ImageId": { - },
+                "InstanceType": "-",
+                "Monitoring": "true|false",
+                "SecurityGroupIds" : [-],
+                "Tags": [
+                    {
+                        "Key": "-",
+                        "Value": "-"
+                    }
+                ],
+                "UserData": { "Fn::Base64": { "Fn::Join": ["\n", [
+                    "#!/bin/bash -xe",
+                    "yum update -y aws-cfn-bootstrap",
+                    { "Fn::Sub": "/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource LaunchConfig --configsets wordpress_install --region ${AWS::Region}" },
+                    { "Fn::Sub": "/opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource WebServerGroup --region ${AWS::Region}" }]]
+                  }}
+        }
+                }
+    }   
+}

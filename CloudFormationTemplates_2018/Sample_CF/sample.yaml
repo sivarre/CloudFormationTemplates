@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  MyDB:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
+      AllocatedStorage: '5'
+      DBInstanceClass: db.m1.small
+      DBName: test-cft
+      DBSubnetGroupName: default
+      Engine: MySQL
+      MasterUsername: wordpress
+      MasterUserPassword: rootroot
+    DeletionPolicy: Snapshot
+  EC2:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-c481fad3
+      InstanceType: t2.micro
+  S3:
+    Type: "AWS::S3::bucket"
+    Properties:
+      BucketName: wp-svarre12345 #Replaced 
+
+    
